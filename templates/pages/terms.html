@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Terms & Conditions - {{ SITE_NAME }}{% endblock %}
+{% block meta_description %}Terms and conditions for using {{ SITE_NAME }}.{% endblock %}
+
+{% block content %}
+<section class="static-page">
+  <div class="container static-page-inner">
+    <h1>Terms &amp; Conditions</h1>
+    <p class="static-updated">Last updated: <span id="terms-date"></span></p>
+
+    <p><em>
+      This is a starting template — please review it with a lawyer and
+      adjust it for your business before relying on it in production.
+    </em></p>
+
+    <h2>1. Acceptance of terms</h2>
+    <p>
+      By accessing or using {{ SITE_NAME }} ("the Service"), you agree to
+      be bound by these Terms &amp; Conditions. If you do not agree, please
+      do not use the Service.
+    </p>
+
+    <h2>2. The Service</h2>
+    <p>
+      {{ SITE_NAME }} lets you upload images to automatically remove or
+      replace their background using an AI model. Results are provided
+      "as is" and may vary in quality depending on the input image.
+    </p>
+
+    <h2>3. Your content</h2>
+    <p>
+      You retain all rights to the images you upload. You confirm that you
+      have the right to upload and process any image you submit, and that
+      doing so does not infringe on anyone else's rights.
+    </p>
+
+    <h2>4. Acceptable use</h2>
+    <p>
+      You agree not to upload unlawful, infringing, or harmful content, and
+      not to use the Service to build a competing product without
+      permission.
+    </p>
+
+    <h2>5. Accounts</h2>
+    <p>
+      If you create an account, you're responsible for keeping your login
+      details secure and for all activity under your account.
+    </p>
+
+    <h2>6. Limitation of liability</h2>
+    <p>
+      The Service is provided without warranties of any kind. To the
+      maximum extent permitted by law, {{ SITE_NAME }} is not liable for
+      any indirect or consequential damages arising from your use of the
+      Service.
+    </p>
+
+    <h2>7. Changes to these terms</h2>
+    <p>
+      We may update these Terms from time to time. Continued use of the
+      Service after changes are posted means you accept the updated Terms.
+    </p>
+
+    <h2>8. Contact</h2>
+    <p>
+      Questions about these Terms? <a href="{% url 'pages:contact' %}">Contact us</a>.
+    </p>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.getElementById('terms-date').textContent = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+</script>
+{% endblock %}

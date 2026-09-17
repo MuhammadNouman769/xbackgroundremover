@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="history-section">
+  <div class="container">
+    <h1>My Images</h1>
+    {% if jobs %}
+      <div class="history-grid">
+        {% for job in jobs %}
+          <div class="history-card">
+            {% if job.is_successful %}
+              <img src="{{ job.processed_image.url }}" alt="Processed image">
+              <a href="{% url 'remover:download' job.pk %}" class="btn btn-outline">Download</a>
+            {% else %}
+              <div class="history-failed">Failed</div>
+            {% endif %}
+            <span class="history-date">{{ job.created_at|date:"d M Y, H:i" }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>You haven't processed any images yet. <a href="{% url 'remover:home' %}">Remove your first background</a>.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

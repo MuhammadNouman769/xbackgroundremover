@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - {{ SITE_NAME }}{% endblock %}
+{% block meta_description %}Learn about {{ SITE_NAME }}, an AI-powered tool that removes and replaces image backgrounds instantly.{% endblock %}
+
+{% block content %}
+<section class="static-page">
+  <div class="container static-page-inner">
+    <h1>About {{ SITE_NAME }}</h1>
+
+    <p>
+      {{ SITE_NAME }} is an AI-powered background remover built for anyone
+      who needs clean, professional product photos, portraits or graphics
+      in seconds — no design software, no manual masking, no waiting on
+      an editor.
+    </p>
+
+    <p>
+      Upload any JPG, PNG or WEBP photo and our on-device AI model detects
+      the foreground and cuts it out automatically. You can keep the
+      transparent result, drop in a solid colour, or place your subject
+      on a completely new background image — all from the same page.
+    </p>
+
+    <h2>Who uses it</h2>
+    <ul class="static-list">
+      <li>E-commerce sellers who need consistent, white/transparent product photos</li>
+      <li>Designers and marketers building banners, ads and social posts</li>
+      <li>Photographers delivering quick client previews</li>
+      <li>Anyone who just needs one image cleaned up, fast</li>
+    </ul>
+
+    <h2>Why it's free to try</h2>
+    <p>
+      The core background-removal tool runs on our own infrastructure, so
+      there's no per-image licensing cost to pass on — you can try it
+      without creating an account. Creating a free account simply lets you
+      keep a history of everything you've processed.
+    </p>
+
+    <p>
+      Have a question we haven't answered here? <a href="{% url 'pages:contact' %}">Get in touch</a>.
+    </p>
+  </div>
+</section>
+{% endblock %}

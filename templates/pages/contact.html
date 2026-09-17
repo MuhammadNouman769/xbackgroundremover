@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - {{ SITE_NAME }}{% endblock %}
+{% block meta_description %}Get in touch with the {{ SITE_NAME }} team.{% endblock %}
+
+{% block content %}
+<section class="static-page">
+  <div class="container static-page-inner">
+    <h1>Contact Us</h1>
+    <p>Questions, feedback, or need help with an image? Send us a message and we'll get back to you.</p>
+
+    <form method="post" class="contact-form" novalidate>
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}<div class="field-error">{{ field.errors.0 }}</div>{% endif %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary btn-large">Send Message</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

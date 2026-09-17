@@ -1,0 +1,30 @@
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <div class="brand-name">{{ SITE_NAME }}</div>
+      <p class="footer-tagline">Remove image backgrounds instantly with AI. Free, fast and automated.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="{% url 'remover:home' %}">Remove Background</a>
+      <a href="{% url 'remover:home' %}#replace-background">Replace Background</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="{% url 'pages:about' %}">About Us</a>
+      <a href="{% url 'pages:contact' %}">Contact</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="{% url 'pages:terms' %}">Terms &amp; Conditions</a>
+      <a href="{% url 'pages:privacy' %}">Privacy Policy</a>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    &copy; {% now "Y" %} {{ SITE_NAME }}. All rights reserved.
+  </div>
+</footer>

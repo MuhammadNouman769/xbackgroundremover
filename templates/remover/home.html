@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static widget_tweaks %}
+
+{% block content %}
+<section class="hero">
+  <div class="container hero-inner">
+    <h1>Upload an image<br>to remove the background</h1>
+    <p class="hero-sub">Fully automated, AI-powered background remover. Free to try.</p>
+
+    <div class="upload-card">
+      <form method="post" enctype="multipart/form-data" id="upload-form">
+        {% csrf_token %}
+
+        <label for="id_original_image" class="upload-dropzone" id="dropzone">
+          <span class="upload-icon">&#8593;</span>
+          <span class="upload-label" id="dropzone-label">Upload Your Image</span>
+          <span class="upload-hint">Or drop an image here (JPG, PNG, WEBP - max {{ MAX_UPLOAD_SIZE_MB|default:10 }}MB)</span>
+          {{ form.original_image|add_class:"visually-hidden-input" }}
+        </label>
+        {% if form.original_image.errors %}
+          <div class="field-error">{{ form.original_image.errors.0 }}</div>
+        {% endif %}
+
+        <div class="bg-options">
+          <p class="bg-options-title">Replace background (optional)</p>
+          <div class="bg-options-row">
+            {% for radio in form.background_type %}
+              <label class="bg-option-radio">{{ radio.tag }} {{ radio.choice_label }}</label>
+            {% endfor %}
+          </div>
+          <div class="bg-options-row">
+            <div class="bg-option-field">
+              <label for="id_background_color">Colour</label>
+              {{ form.background_color }}
+            </div>
+            <div class="bg-option-field">
+              <label for="id_background_image">Background image</label>
+              {{ form.background_image|add_class:"form-control" }}
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-large" id="submit-btn">
+          Remove Background
+        </button>
+      </form>
+    </div>
+
+    {% comment %} {% if recent_examples %}
+    <div class="examples">
+      <p>Try one of these</p>
+      <div class="examples-row">
+        {% for job in recent_examples %}
+          <img src="{{ job.processed_image.url }}" alt="example" class="example-thumb">
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %} {% endcomment %}
+  </div>
+</section>
+
+<section class="features">
+  <div class="container features-grid">
+    <div class="feature-card">
+      <h3>Fully automated background remover</h3>
+      <p>Instantly get an image with a transparent background. Fully automated and free.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Replace image background</h3>
+      <p>Easily replace the original background with a solid colour or another image.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Design the way you want</h3>
+      <p>Create stunning banners and designs from your transparent image easily.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Show the chosen file name inside the dropzone, and auto-submit spinner state.
+  const input = document.getElementById('id_original_image');
+  const label = document.getElementById('dropzone-label');
+  const form = document.getElementById('upload-form');
+  const submitBtn = document.getElementById('submit-btn');
+
+  if (input) {
+    input.addEventListener('change', () => {
+      if (input.files && input.files[0]) {
+        label.textContent = input.files[0].name;
+      }
+    });
+  }
+  if (form) {
+    form.addEventListener('submit', () => {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Processing...';
+    });
+  }
+</script>
+{% endblock %}

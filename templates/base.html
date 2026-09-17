@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ SITE_NAME }} - Remove Image Background Instantly{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Remove and replace image backgrounds instantly with AI. Free, automated and production-ready background remover.{% endblock %}">
+
+  <!-- Favicon: shows up in the browser tab and in Google search results -->
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+  <link rel="apple-touch-icon" href="{% static 'img/logo.svg' %}">
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:title" content="{{ SITE_NAME }} - Remove Image Background Instantly">
+  <meta property="og:description" content="Remove and replace image backgrounds instantly with AI.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ SITE_DOMAIN }}">
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  {% if GOOGLE_ANALYTICS_ID %}
+  <!-- Google Analytics (only loads once GOOGLE_ANALYTICS_ID is set in .env) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS_ID }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ GOOGLE_ANALYTICS_ID }}');
+  </script>
+  {% endif %}
+
+  {% if GOOGLE_ADSENSE_CLIENT_ID %}
+  <!-- Google AdSense (only loads once GOOGLE_ADSENSE_CLIENT_ID is set in .env) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ GOOGLE_ADSENSE_CLIENT_ID }}" crossorigin="anonymous"></script>
+  {% endif %}
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  {% include "includes/header.html" %}
+
+  <main class="site-main">
+    {% if messages %}
+      <div class="container messages">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include "includes/footer.html" %}
+
+  <script src="{% static 'js/main.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>
